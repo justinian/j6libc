@@ -1,0 +1,10 @@
+# Bonnibel module
+
+name = "crt"
+kind = "lib"
+targets = [ "user" ]
+default = true
+
+sources = [
+	"x86_64/crt0.s",
+]

@@ -1,0 +1,25 @@
+[targets.user]
+cc = "clang"
+cxx = "clang++"
+ld = "ld.lld"
+ar = "ar"
+nasm = "nasm"
+objcopy = "objcopy"
+
+ccflags = [
+    "-nostdlib",
+    "-nostdinc",
+    "-ffreestanding",
+    "-nodefaultlibs",
+    "-fno-omit-frame-pointer",
+	"-O3",
+	"${ccflags}",
+]
+
+ldflags = [
+    "-nostdlib",
+    "-Bstatic",
+	"-z", "separate-code",
+	"-O3",
+	"${ldflags}",
+]

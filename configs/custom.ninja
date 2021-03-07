@@ -1,0 +1,19 @@
+rule rsync
+  command = echo -n "$out : " > $out.d; find $in -type f -printf '%p ' >> $out.d; rsync -a $in `dirname $out`/
+  description = Syncing $name
+  depfile = $out.d
+  deps = gcc
+
+build ${build_root}/out/lib/libc.a : cp ${build_root}/user/libc.a
+    name = libc.a
+
+build ${build_root}/out/lib/crt0.o : cp ${build_root}/user/crt.dir/x86_64/crt0.s.o
+    name = crt0.o
+
+build ${build_root}/out/include : rsync ${source_root}/src/libc/include ${source_root}/src/pdclib/include
+    name = headers
+
+
+default ${build_root}/out/lib/libc.a
+default ${build_root}/out/lib/crt0.o
+default ${build_root}/out/include
