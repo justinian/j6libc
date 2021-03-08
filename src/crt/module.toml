@@ -7,4 +7,6 @@ default = true
 
 sources = [
 	"x86_64/crt0.s",
+	"x86_64/crti.s",
+	"x86_64/crtn.s",
 ]

@@ -5,15 +5,26 @@ rule rsync
   deps = gcc
 
 build ${build_root}/out/lib/libc.a : cp ${build_root}/user/libc.a
-    name = libc.a
+    name = libc
 
 build ${build_root}/out/lib/crt0.o : cp ${build_root}/user/crt.dir/x86_64/crt0.s.o
-    name = crt0.o
+    name = crt0
+
+build ${build_root}/out/lib/crt1.o : cp ${build_root}/user/crt.dir/x86_64/crt0.s.o
+    name = crt1
+
+build ${build_root}/out/lib/crti.o : cp ${build_root}/user/crt.dir/x86_64/crti.s.o
+    name = crti
+
+build ${build_root}/out/lib/crtn.o : cp ${build_root}/user/crt.dir/x86_64/crtn.s.o
+    name = crtn
 
 build ${build_root}/out/include : rsync ${source_root}/src/libc/include ${source_root}/src/pdclib/include
     name = headers
 
-
 default ${build_root}/out/lib/libc.a
 default ${build_root}/out/lib/crt0.o
+default ${build_root}/out/lib/crt1.o
+default ${build_root}/out/lib/crti.o
+default ${build_root}/out/lib/crtn.o
 default ${build_root}/out/include
